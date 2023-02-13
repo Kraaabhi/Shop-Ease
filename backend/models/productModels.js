@@ -1,5 +1,5 @@
 const mongoose=require("mongoose")
-const productSchema= mongoose.Schema({
+const productSchema= new mongoose.Schema({
     name:{
         type: String,
         required:[true,"please enter Product Name"],
@@ -14,7 +14,7 @@ const productSchema= mongoose.Schema({
         required:[true,"please enter Product Price"],
         maxLength:[8,"price length can not exceed 8 character"]
    },
-    rating:{
+    ratings:{
         type:Number,
         default:0
 
@@ -49,6 +49,11 @@ const productSchema= mongoose.Schema({
                 type:String,
                 required:true
             },
+            user:{
+                type:mongoose.Schema.ObjectId,
+                ref:"User",
+                required:true,
+            },
             rating:{
                 type:Number,
                 required:true
@@ -61,6 +66,11 @@ const productSchema= mongoose.Schema({
 
         }
     ],
+    user:{
+        type:mongoose.Schema.ObjectId,
+        ref:"User",
+        required:true,
+    },
     createdAt:{
         type:Date,
         default:Date.now
